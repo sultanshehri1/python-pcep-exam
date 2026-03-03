@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>PCEP – Python Entry-Level Practice Exam</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>PCEP – Python Entry-Level Exam</h1>
+  <p>Practice Test (Unofficial)</p>
+</header>
+
+<main id="app">
+
+  <section id="intro">
+    <h2>Instructions</h2>
+    <ul>
+      <li>Total questions: <strong>30</strong></li>
+      <li>Single choice per question</li>
+      <li>No time limit (can be enabled)</li>
+      <li>Results shown after submission</li>
+    </ul>
+
+    <button id="startBtn">Start Exam</button>
+  </section>
+
+  <section id="exam" class="hidden">
+    <div id="question-box"></div>
+
+    <div class="navigation">
+      <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+      <button id="submitBtn">Submit Exam</button>
+    </div>
+  </section>
+
+  <section id="result" class="hidden">
+    <h2>Exam Result</h2>
+    <p id="score"></p>
+    <div id="review"></div>
+
+    <button onclick="location.reload()">Restart Exam</button>
+  </section>
+
+</main>
+
+<script src="config.js"></script>
+<script src="questions.js"></script>
+<script src="engine.js"></script>
+
+</body>
+</html>
