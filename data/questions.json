@@ -251,7 +251,7 @@
     "level": "PCPP-1",
     "type": "multiple_choice",
     "points": 3,
-    "prompt": "ما هو مفهوم "duck typing" في بايثون؟",
+    "prompt": "ما هو مفهوم \"duck typing\" في بايثون؟",
     "choices": ["التركيز على سلوك الكائن بدلاً من نوعه","فرض نوع ثابت على المتغيرات","تحويل الأنواع تلقائياً","تعدد الوراثة"],
     "answer": "التركيز على سلوك الكائن بدلاً من نوعه",
     "explanation": "duck typing يعني أن تُعامِل الكائن حسب ما يمكنه فعله، لا حسب فئته."
@@ -294,5 +294,543 @@
     "choices": ["timeit", "unittest", "pylint", "mypy"],
     "answer": "timeit",
     "explanation": "timeit تُستخدم لقياس زمن تنفيذ تعبيرات صغيرة."
+  },
+  {
+    "id": "q31",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما المشغّل المستخدم للقسمة الصحيحة (floor division) في بايثون؟",
+    "choices": ["/", "//", "%", "**"],
+    "answer": "//",
+    "explanation": "// يستخدم للقسمة الصحيحة (floor division)."
+  },
+  {
+    "id": "q32",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 1,
+    "prompt": "ما مخرج الكود: print(2 ** 3) ؟",
+    "code": "print(2 ** 3)",
+    "answer": "8",
+    "explanation": "** هو عامل الأسس: 2**3 = 8."
+  },
+  {
+    "id": "q33",
+    "level": "PCEP",
+    "type": "true_false",
+    "points": 1,
+    "prompt": "القوائم (list) في بايثون تحافظ على الترتيب دائمًا؟",
+    "answer": "True",
+    "explanation": "القوائم مرتبة بطبيعتها وتحتفظ بالترتيب."
+  },
+  {
+    "id": "q34",
+    "level": "PCAP",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "أي طريقة تُستخدم للحصول على مفاتيح القاموس في بايثون؟",
+    "choices": ["keys()", "values()", "items()", "get()"],
+    "answer": "keys()",
+    "explanation": "keys() تُعيد عرضًا للمفاتيح في القاموس."
+  },
+  {
+    "id": "q35",
+    "level": "PCAP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "print([x*x for x in range(3)])",
+    "answer": "[0, 1, 4]",
+    "explanation": "قائمة comprehension تحسب مربعات الأعداد 0،1،2."
+  },
+  {
+    "id": "q36",
+    "level": "PCAP",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "ما الذي تُرجعه الدالة enumerate() عند استخدامها مع قائمة؟",
+    "choices": ["عناصر فقط", "فهرس فقط", "زوج (فهرس،عنصر)", "قيمة مكررة"],
+    "answer": "زوج (فهرس،عنصر)",
+    "explanation": "enumerate تعيد أزواج (index, value) عند التكرار."
+  },
+  {
+    "id": "q37",
+    "level": "PCPP-1",
+    "type": "multiple_choice",
+    "points": 3,
+    "prompt": "أي ديكور يستخدم لتعريف وظيفة كـ class method؟",
+    "choices": ["@staticmethod", "@classmethod", "@property", "@decorator"],
+    "answer": "@classmethod",
+    "explanation": "@classmethod يجعل الدالة تستقبل cls بدلاً من self."
+  },
+  {
+    "id": "q38",
+    "level": "PCPP-1",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "print((lambda x: x + 1)(4))",
+    "answer": "5",
+    "explanation": "lambda تعيد دالة صغيرة؛ 4+1=5."
+  },
+  {
+    "id": "q39",
+    "level": "PCPP-2",
+    "type": "multiple_choice",
+    "points": 3,
+    "prompt": "أي مكتبة تُستخدم لإنشاء عمليات مستقلة (processes) في بايثون؟",
+    "choices": ["threading", "multiprocessing", "asyncio", "subprocess"],
+    "answer": "multiprocessing",
+    "explanation": "multiprocessing تُستخدم لإنشاء عمليات مستقلة متعددة."
+  },
+  {
+    "id": "q40",
+    "level": "PCEP",
+    "type": "fill_in_blank",
+    "points": 1,
+    "prompt": "أكمل: بداية شرط في بايثون تكتب بالكلمة ____ .",
+    "answer": "if",
+    "explanation": "if تُستخدم لبدء شرط."
+  },
+  {
+    "id": "q41",
+    "level": "PCAP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "try:\n    x = 1 / 0\nexcept ZeroDivisionError:\n    print('err')\nelse:\n    print('no error')",
+    "answer": "err",
+    "explanation": "يتم التقاط ZeroDivisionError وتنفيذ قسم except."
+  },
+  {
+    "id": "q42",
+    "level": "PCAP",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "أي بناء يُستخدم لإنشاء قاموس من تعبير؟",
+    "choices": ["[x:x*x for x in range(3)]", "{x:x*x for x in range(3)}", "(x:x for x in range(3))", "dictcomp()"],
+    "answer": "{x:x*x for x in range(3)}",
+    "explanation": "هذا هو قالب dict comprehension."
+  },
+  {
+    "id": "q43",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 1,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "s = 'a b'\nprint(s.split())",
+    "answer": "['a', 'b']",
+    "explanation": "split() تقسم السلسلة على الفراغات وتعيد قائمة بالعناصر."
+  },
+  {
+    "id": "q44",
+    "level": "PCAP",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "ماذا تفعل pop() عند استدعائها بدون وسيط على قائمة؟",
+    "choices": ["تحذف أول عنصر", "تحذف العنصر الأخير وتُرجعه", "تحذف كل العناصر", "ترجع طول القائمة"],
+    "answer": "تحذف العنصر الأخير وتُرجعه",
+    "explanation": "pop() بدون مؤشر يزيل العنصر الأخير ويُرجعه."
+  },
+  {
+    "id": "q45",
+    "level": "PCPP-1",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "ما الصيغة الصحيحة لتعريف صف B يرث من صف A؟",
+    "choices": ["class B(A):", "class B <- A:", "class B inherits A:", "class B.A:"],
+    "answer": "class B(A):",
+    "explanation": "الصيغة الصحيحة في بايثون لوراثة الصف هي class B(A):."
+  },
+  {
+    "id": "q46",
+    "level": "PCPP-2",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "def gen():\n    for i in range(2):\n        yield i\n\ng = gen()\nprint(next(g))\nprint(next(g))",
+    "answer": "0\n1",
+    "explanation": "المولد يولد 0 ثم 1 عند استدعاء next مرتين."
+  },
+  {
+    "id": "q47",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "أي دالة تحول سلسلة رقمية إلى عدد صحيح؟",
+    "choices": ["int()", "str()", "float()", "bool()"],
+    "answer": "int()",
+    "explanation": "int('123') يتحول إلى العدد 123."
+  },
+  {
+    "id": "q48",
+    "level": "PCAP",
+    "type": "fill_in_blank",
+    "points": 1,
+    "prompt": "أكمل: لاقتطاع أول عنصرين من القائمة lst نكتب lst[ ____ ] .",
+    "answer": ":2",
+    "explanation": "slicing [:2] يعيد أول عنصرين (فهرس 0 و1)."
+  },
+  {
+    "id": "q49",
+    "level": "PCPP-1",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "ما الهدف من التعريف __init__ داخل الصف؟",
+    "choices": ["تهيئة كائن جديد (constructor)", "تعريف دالة ثابتة", "تعريف متغير صف فقط", "حذف كائن"],
+    "answer": "تهيئة كائن جديد (constructor)",
+    "explanation": "__init__ تُستخدم لتهيئة الخصائص عند إنشاء مثيل من الصف."
+  },
+  {
+    "id": "q50",
+    "level": "PCAP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "x = [1,2]\ny = x\ny.append(3)\nprint(x)",
+    "answer": "[1, 2, 3]",
+    "explanation": "y و x تشيران لنفس القائمة، لذا التغيير ينعكس على x."
+  },
+  {
+    "id": "q51",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما الناتج من تنفيذ التعليمة: print(10 % 3) ؟",
+    "choices": ["1", "3", "0", ""],
+    "answer": "1",
+    "explanation": "% يعطي باقي القسمة؛ 10 % 3 = 1."
+  },
+  {
+    "id": "q52",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "أي من التالي يُستخدم لتعليق سطر واحد في بايثون؟",
+    "choices": ["//", "#", "/* */", "--"],
+    "answer": "#",
+    "explanation": "# يستخدم لكتابة تعليق سطر واحد في بايثون."
+  },
+  {
+    "id": "q53",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "a = [1,2,3]\nprint(a[1])",
+    "answer": "2",
+    "explanation": "الفهرسة تبدأ من 0؛ a[1] هو العنصر الثاني بالقيمة 2."
+  },
+  {
+    "id": "q54",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما نوع المتغير 3.14 في بايثون؟",
+    "choices": ["int", "float", "str", "complex"],
+    "answer": "float",
+    "explanation": "الأعداد العشرية تُخزن كـ float."
+  },
+  {
+    "id": "q55",
+    "level": "PCEP",
+    "type": "true_false",
+    "points": 1,
+    "prompt": "يمكن استخدام علامة + لضم السلاسل النصية في بايثون؟",
+    "answer": "True",
+    "explanation": "'a' + 'b' ينتج 'ab'؛ يمكن ضم السلاسل باستخدام +."
+  },
+  {
+    "id": "q56",
+    "level": "PCEP",
+    "type": "fill_in_blank",
+    "points": 1,
+    "prompt": "أكمل: لتهيئة حلقة for على قائمة nums نكتب: for x in ____: ",
+    "answer": "nums",
+    "explanation": "for x in nums: يمر عبر عناصر القائمة nums."
+  },
+  {
+    "id": "q57",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "أي دالة تُستخدم للحصول على عدد عناصر القائمة؟",
+    "choices": ["len()", "count()", "size()", "length()"],
+    "answer": "len()",
+    "explanation": "len() تُعيد عدد العناصر في تسلسل أو مجموعة."
+  },
+  {
+    "id": "q58",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "print('Hello'.lower())",
+    "answer": "hello",
+    "explanation": "lower() تحول الحروف إلى أحرف صغيرة."
+  },
+  {
+    "id": "q59",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما قيمة المتغير x بعد تنفيذ: x = 5; x += 2 ؟",
+    "choices": ["7", "5", "2", "8"],
+    "answer": "7",
+    "explanation": "x += 2 يضيف 2 إلى قيمة x الحالية (5+2=7)."
+  },
+  {
+    "id": "q60",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "أي من التالي يمثل سلسلة نصية صحيحة؟",
+    "choices": ["\"text\"", "text", "#text", "=text="],
+    "answer": "\"text\"",
+    "explanation": "السلاسل النصية يجب أن تُحاط بعلامات اقتباس مفردة أو مزدوجة."
+  },
+  {
+    "id": "q61",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "print( 'a' + str(1) )",
+    "answer": "a1",
+    "explanation": "تحويل العدد 1 إلى نص ثم ضمه بالسلسلة يعطي 'a1'."
+  },
+  {
+    "id": "q62",
+    "level": "PCEP",
+    "type": "true_false",
+    "points": 1,
+    "prompt": "المشغّل == يتحقق من المساواة في القيم وليس هوية الكائن في بايثون؟",
+    "answer": "True",
+    "explanation": "== يقارن القيم؛ is يقارن الهوية (الكائن نفسه)."
+  },
+  {
+    "id": "q63",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما الكلمة المحجوزة للخروج من دالة وإرجاع قيمة؟",
+    "choices": ["break", "return", "exit", "stop"],
+    "answer": "return",
+    "explanation": "return تُرجع قيمة من الدالة وتنهي تنفيذها."
+  },
+  {
+    "id": "q64",
+    "level": "PCEP",
+    "type": "fill_in_blank",
+    "points": 1,
+    "prompt": "أكمل: تُستخدم الدالة ____ لتحويل قيمة إلى سلسلة نصية.",
+    "answer": "str",
+    "explanation": "str(123) يعطي '123'."
+  },
+  {
+    "id": "q65",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما مخرجات الكود: print(bool(0)) ؟",
+    "choices": ["False", "True", "0", "Error"],
+    "answer": "False",
+    "explanation": "القيمة 0 تعتبر False عند تحويلها إلى منطقية."
+  },
+  {
+    "id": "q66",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "for i in range(3):\n    print(i, end='')",
+    "answer": "012",
+    "explanation": "range(3) يعطي 0،1،2 وطباعة بدون فواصل تنتج '012'."
+  },
+  {
+    "id": "q67",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "أي جملة تُستخدم لفحص شرط واحد فقط؟",
+    "choices": ["if", "for", "while", "def"],
+    "answer": "if",
+    "explanation": "if تُستخدم لتنفيذ كتلة برمجية عند تحقق شرط."
+  },
+  {
+    "id": "q68",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما النتيجة عند تنفيذ: len([1,2,3,4]) ؟",
+    "choices": ["4", "3", "5", ""],
+    "answer": "4",
+    "explanation": "القائمة تحتوي على 4 عناصر."
+  },
+  {
+    "id": "q69",
+    "level": "PCEP",
+    "type": "true_false",
+    "points": 1,
+    "prompt": "يمكن استخدام continue لتخطي تكرار واحد داخل حلقة في بايثون؟",
+    "answer": "True",
+    "explanation": "continue تتخطى بقية جسم الحلقة وتنتقل إلى التكرار التالي."
+  },
+  {
+    "id": "q70",
+    "level": "PCEP",
+    "type": "fill_in_blank",
+    "points": 1,
+    "prompt": "أكمل: تبدأ سلسلة متعددة الأسطر في بايثون باستخدام ثلاث ____ .",
+    "answer": """",
+    "explanation": "تستخدم ثلاث علامات اقتباس لتحديد سلسلة متعددة الأسطر (''' أو """)."
+  },
+  {
+    "id": "q71",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "أي من التالي يعرّف متغيراً صالحاً في بايثون؟",
+    "choices": ["my_var", "2ndVar", "var-name", "class"],
+    "answer": "my_var",
+    "explanation": "my_var اسم متغير صحيح. الأسماء لا تبدأ برقم ولا تحتوي على - وتجنب الكلمات المحجوزة."
+  },
+  {
+    "id": "q72",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "x = [1,2,3]\nprint(x + [4,5])",
+    "answer": "[1, 2, 3, 4, 5]",
+    "explanation": "جمع القوائم يدمج عناصرها في قائمة جديدة."
+  },
+  {
+    "id": "q73",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما نوع خطأ SyntaxError يشير إليه؟",
+    "choices": ["خطأ في بناء الجملة", "خطأ منطقي", "خطأ وقت التنفيذ", "خطأ في الإدخال"],
+    "answer": "خطأ في بناء الجملة",
+    "explanation": "SyntaxError يعني وجود خطأ في صياغة الكود."
+  },
+  {
+    "id": "q74",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما مخرج: print(type({})) ؟",
+    "choices": ["<class 'dict'>", "<class 'list'>", "<class 'set'>", "<class 'tuple'>"],
+    "answer": "<class 'dict'>",
+    "explanation": "{} ينتج قاموساً (dict) في بايثون."
+  },
+  {
+    "id": "q75",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "print(' '.join(['a','b','c']))",
+    "answer": "a b c",
+    "explanation": "join توصل عناصر القائمة بالسلسلة الفاصلة ' '."
+  },
+  {
+    "id": "q76",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "أي من التالي يقوم بتحويل قائمة إلى مجموعة؟",
+    "choices": ["set([1,2])", "list([1,2])", "dict([1,2])", "tuple([1,2])"],
+    "answer": "set([1,2])",
+    "explanation": "set() تنشئ مجموعة من عناصر قابلة للتجزئة."
+  },
+  {
+    "id": "q77",
+    "level": "PCEP",
+    "type": "true_false",
+    "points": 1,
+    "prompt": "العامل \n (newline) داخل سلسلة مطبوعة سيؤدي للسطر الجديد عند الطباعة؟",
+    "answer": "True",
+    "explanation": "\n يمثل حرف الانتقال للسطر الجديد داخل السلاسل."
+  },
+  {
+    "id": "q78",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "أي من التالي يعرّف نهاية الملف عند القراءة؟",
+    "choices": ["EOF", "END", "EOFError", "STOP"],
+    "answer": "EOF",
+    "explanation": "EOF يرمز إلى نهاية الملف (End Of File)."
+  },
+  {
+    "id": "q79",
+    "level": "PCEP",
+    "type": "fill_in_blank",
+    "points": 1,
+    "prompt": "أكمل: لفتح ملف للقراءة نستخدم open('file.txt', '____')",
+    "answer": "r",
+    "explanation": "وضع 'r' لفتح الملف في وضع القراءة."
+  },
+  {
+    "id": "q80",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "print(bool(''))",
+    "answer": "False",
+    "explanation": "سلسلة فارغة تُعتبر False عند تحويلها إلى منطقية."
+  },
+  {
+    "id": "q81",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما العبارة الصحيحة عن التعابير الشرطية (ternary) في بايثون؟",
+    "choices": ["a if cond else b", "if cond then a else b", "cond ? a : b", "a when cond else b"],
+    "answer": "a if cond else b",
+    "explanation": "صيغة التعابير الشرطية في بايثون هي: <expr1> if <cond> else <expr2>."
+  },
+  {
+    "id": "q82",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما نوع البيانات الناتج عن {'a':1}.items() في بايثون 3؟",
+    "choices": ["view of items", "list", "dict", "tuple"],
+    "answer": "view of items",
+    "explanation": "items() تُعيد عرضًا (view) للأزواج المفتاح-القيمة في القاموس."
+  },
+  {
+    "id": "q83",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "x = 'abc'\nprint(x[0])",
+    "answer": "a",
+    "explanation": "x[0] هو الحرف الأول من السلسلة 'a'."
+  },
+  {
+    "id": "q84",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "أي عبارة تُستخدم لتعريف حزمة (module) في بايثون؟",
+    "choices": ["import", "package", "module", "require"],
+    "answer": "import",
+    "explanation": "import يستخدم لاستيراد وحدات/حزم في بايثون."
+  },
+  {
+    "id": "q85",
+    "level": "PCEP",
+    "type": "fill_in_blank",
+    "points": 1,
+    "prompt": "أكمل: تعطى قيمة افتراضية للوسيطة في دالة بكتابة parameter=____ داخل تعريف الدالة.",
+    "answer": "القيمة",
+    "explanation": "يمكن تحديد قيمة افتراضية للمعامل بكتابتها مثل def f(a=5): ... ."
   }
 ]
