@@ -1,4 +1,6 @@
-/* assets/css/style.css - تصميم مُحسّن بواجهة ألوان خفيفة وملمس عصري (RTL) */
+/* assets/css/style.css - تصميم مُحسّن بواجهة ألوان خفيفة وملمس عصري (RTL)
+   بالإضافة إلى تنسيقات لنتائج الاختبار (صحيح/خاطئ)
+*/
 :root{
   --bg: #f8fbff;     /* very light blue */
   --card: #ffffff;    /* white card */
@@ -34,4 +36,14 @@ input[type=text]#answer-input{width:100%;padding:10px;border-radius:8px;border:1
 .progress-bar{height:8px;background:#eaf4ff;border-radius:6px;overflow:hidden;margin-top:8px}
 .progress-bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0}
 .small{font-size:13px;color:var(--muted)}
+
+/* نتائج الاختبار - ألوان واضحة للإجابات */
+.result-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.result-score{font-weight:800;color:var(--text)}
+.result-percent{color:var(--muted)}
+.answer-correct{color:var(--success);font-weight:700}
+.answer-wrong{color:var(--danger);font-weight:700}
+.correct-badge{background:rgba(22,163,74,0.12);color:var(--success);padding:4px 8px;border-radius:8px;font-weight:700}
+.wrong-badge{background:rgba(239,68,68,0.08);color:var(--danger);padding:4px 8px;border-radius:8px;font-weight:700}
+
 @media (max-width:700px){main#app{margin:12px;padding:12px} .controls{flex-wrap:wrap;justify-content:space-between}}

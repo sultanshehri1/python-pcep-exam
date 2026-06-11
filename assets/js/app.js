@@ -1,4 +1,4 @@
-// assets/js/app.js - نسخة محسّنة: تضمن احترام عدد الأسئلة المطلوب وتطبيع المقارنات
+// assets/js/app.js - تحسين الخوارزمية لتأمين العدد المطلوب من الأسئلة مع إعطاء أولوية لمستوى المستخدم
 const QUESTIONS_URL = 'data/questions.json';
 
 let questions = [];
@@ -33,38 +33,34 @@ function start(){
   state.timed = el('timed').checked;
   state.answers = {};
 
-  // بناء مجموعة الأسئلة مع محاولة الوفاء بعدد الأسئلة المطلوب
+  // تجميع الأسئلة: مستوى المستخدم أولاً ثم الباقي
   const byLevel = questions.filter(q => q.level === state.level);
-  let session = [];
-
-  // نسخ مجموعات لمساعدة الملء
   const others = questions.filter(q => q.level !== state.level);
 
-  // خshuffle
-  shuffle(byLevel);
-  shuffle(others);
+  // pool يعطي أولوية لأسئلة نفس المستوى
+  const pool = [];
+  // أضف أولاً أسئلة بنفس المستوى
+  pool.push(...byLevel);
+  // ثم أضف الباقي
+  pool.push(...others);
 
-  // إملاء من المستوى أولاً
-  session = session.concat(byLevel.slice(0));
-
-  // إذا لم يكفِ، أضف من المستويات الأخرى (بدون تكرار)
-  for(let i=0, j=0; session.length < state.requestedCount && j < others.length; j++){
-    if(!session.find(s => s.id === others[j].id)) session.push(others[j]);
+  if(pool.length === 0){
+    alert('لا توجد أسئلة في البنك حالياً. الرجاء إضافة أسئلة إلى data/questions.json');
+    return;
   }
 
-  // إذا ما زلنا أقل من المطلوب، نُسمح بالتكرار بطريقة متعمدة (دوران)
-  let k = 0;
-  const combined = session.length ? session.slice(0) : questions.slice(0);
-  while(session.length < state.requestedCount && combined.length > 0){
-    session.push(combined[k % combined.length]);
-    k++;
+  // الآن نملأ الجلسة بحيث نصل للعدد المطلوب حتى لو اضطررنا للتكرار
+  const session = [];
+  for(let i = 0; i < state.requestedCount; i++){
+    const item = pool[i % pool.length];
+    session.push(item);
   }
 
-  // الآن نقطع ونخلط لضمان عدم ظهور تسلسل ممل
+  // نخلط الجلسة كي لا تظهر الأسئلة في ترتيب ثابت
   shuffle(session);
-  state.sessionQuestions = session.slice(0, state.requestedCount);
 
-  // ضبط العد الفعلي ليتطابق مع عدد الأسئلة المُجهز
+  // أخيراً نعطي sessionQuestions
+  state.sessionQuestions = session;
   state.count = state.sessionQuestions.length;
   state.index = 0;
   showExam();
@@ -131,13 +127,6 @@ function renderQuestion(){
     const txt = area.querySelector('#answer-input');
     if(txt) txt.value = saved;
   }
-
-  // تحديث شريط التقدم البسيط (يمكن توسيعه لاحقاً)
-  updateProgressBar();
-}
-
-function updateProgressBar(){
-  // إذا أردت شريط مرئي أضفه هنا؛ حالياً نحدّث النص فقط
 }
 
 function nextQuestion(){
@@ -193,7 +182,6 @@ function showResults(){
     if(q.type === 'multiple_choice' || q.type === 'true_false'){
       ok = normalizeAnswer(q.answer) === ans;
     } else if(q.type === 'code_output' || q.type === 'fill_in_blank'){
-      // قبول التطابق النصي بعد التطبيع، أو قبول regex إذا مُعرّف
       if(q.answer_regex){
         try{
           const re = new RegExp(q.answer_regex,'i');
@@ -207,19 +195,29 @@ function showResults(){
     }
 
     if(ok) earned += (q.points || 1);
-    review.push({q, ans: rawAns, ok});
+    review.push({q, rawAns, ok});
   });
-  el('score').textContent = `النقاط: ${earned} / ${total} — النسبة: ${total? Math.round(earned/total*100):0}%`;
+
+  // عرض النتيجة
+  const percent = total ? Math.round(earned/total*100) : 0;
+  el('score').innerHTML = `<div class="result-header"><div class="result-score">النقاط: ${earned} / ${total}</div><div class="result-percent">النسبة: ${percent}%</div></div>`;
+
   const rdiv = el('review');
   rdiv.innerHTML = '';
   review.forEach(item => {
     const d = document.createElement('div');
     d.className = 'review-item';
-    d.innerHTML = `<h4>${escapeHtml(item.q.prompt)}</h4>
-                   <p class=\"small\">إجابتك: ${escapeHtml(item.ans || '')}</p>
-                   <p class=\"small\">الصحيحة: ${escapeHtml(item.q.answer || (item.q.answer_regex || ''))}</p>
-                   <p class=\"small\">النتيجة: ${item.ok ? '<span style=\"color:var(--success)\">صحيح</span>' : '<span style=\"color:var(--danger)\">خاطئ</span>'}</p>
-                   <p class=\"small\">شرح: ${escapeHtml(item.q.explanation || '')}</p>`;
+
+    const badge = item.ok ? `<span class="correct-badge">صحيح</span>` : `<span class="wrong-badge">خاطئ</span>`;
+    const correctText = item.q.answer || (item.q.answer_regex || '');
+
+    d.innerHTML = `
+      <h4>${escapeHtml(item.q.prompt)}</h4>
+      <p class="small">إجابتك: <strong>${escapeHtml(item.rawAns || '')}</strong></p>
+      <p class="small">الصحيحة: <strong>${escapeHtml(correctText)}</strong></p>
+      <p class="small">النتيجة: ${badge}</p>
+      <p class="small">شرح: ${escapeHtml(item.q.explanation || '')}</p>
+    `;
     rdiv.appendChild(d);
   });
 }
