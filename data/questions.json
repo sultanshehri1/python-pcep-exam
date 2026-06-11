@@ -76,7 +76,7 @@
     "prompt": "ما هو مخرج الكود التالي؟",
     "code": "def f(a, b=2):\n    return a*b\n\nprint(f(3))",
     "answer": "6",
-    "explanation": "الوسيط b يأخذ القيمة الافتراضية 2، 3*2=6."
+    "explanation": "الوسيط b يأخذ القيمة الافتراضية 2؛ 3*2=6."
   },
   {
     "id": "q9",
@@ -97,5 +97,202 @@
     "choices": ["break", "stop", "exit", "return"],
     "answer": "break",
     "explanation": "break يخرج من الحلقة الحالية."
+  },
+  {
+    "id": "q11",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما قيمة التعبير: 2 + 3 * 4 ؟",
+    "choices": ["20", "14", "10", "24"],
+    "answer": "14",
+    "explanation": "الأسبقية للضرب: 3*4=12؛ 12+2=14."
+  },
+  {
+    "id": "q12",
+    "level": "PCEP",
+    "type": "true_false",
+    "points": 1,
+    "prompt": "القواميس (dict) في بايثون تحفظ ترتيب الإدخالات دائمًا؟",
+    "answer": "True",
+    "explanation": "ابتداءً من بايثون 3.7 أصبح dict يحافظ على ترتيب الإدراج."
+  },
+  {
+    "id": "q13",
+    "level": "PCAP",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "أي طريقة تُستخدم لإضافة عنصر إلى نهاية قائمة في بايثون؟",
+    "choices": ["append()", "add()", "push()", "insert_last()"],
+    "answer": "append()",
+    "explanation": "append() تضيف عنصرًا واحدًا إلى نهاية القائمة."
+  },
+  {
+    "id": "q14",
+    "level": "PCAP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "d = {'a':1, 'b':2}\nprint(d.get('c', 0))",
+    "answer": "0",
+    "explanation": "get يسمح بتحديد قيمة افتراضية عند عدم وجود المفتاح."
+  },
+  {
+    "id": "q15",
+    "level": "PCAP",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "ما الفرق بين remove() و pop() على القوائم؟",
+    "choices": ["remove يزيل بالقيمة، pop يزيل بالمؤشر ويُرجع القيمة", "لا فرق", "pop يزيل بالقيمة، remove بالمؤشر", "كلاهما يحذف العنصر الأخير فقط"],
+    "answer": "remove يزيل بالقيمة، pop يزيل بالمؤشر ويُرجع القيمة",
+    "explanation": "remove(value) يزيل أول ظهور للقيمة، pop(index) يزيل ويُرجع القيمة."
+  },
+  {
+    "id": "q16",
+    "level": "PCPP-1",
+    "type": "multiple_choice",
+    "points": 3,
+    "prompt": "ما معنى مفهوم الوراثة (inheritance) في البرمجة الكائنية؟",
+    "choices": ["إعادة استخدام الخصائص والأساليب من صف آخر","تحديد متغيرات محلية فقط","تنفيذ دوال مكررة","استدعاء الوظائف عن بعد"],
+    "answer": "إعادة استخدام الخصائص والأساليب من صف آخر",
+    "explanation": "الوراثة تسمح للصف الفرعي باستخدام خصائص وسلوك الصف الأب."
+  },
+  {
+    "id": "q17",
+    "level": "PCPP-1",
+    "type": "code_output",
+    "points": 3,
+    "prompt": "ما هو مخرج الكود التالي؟",
+    "code": "for i in range(2):\n    print(i)\nelse:\n    print('done')",
+    "answer": "0\n1\ndone",
+    "explanation": "else في حلقات تُنفذ إذا لم تُكسر الحلقة بواسط break."
+  },
+  {
+    "id": "q18",
+    "level": "PCPP-2",
+    "type": "multiple_choice",
+    "points": 3,
+    "prompt": "ما الفرق الرئيسي بين threading و multiprocessing في بايثون؟",
+    "choices": ["threading يشارك نفس الذاكرة، multiprocessing يستخدم عمليات منفصلة","لا فرق","multiprocessing أسرع دائمًا","threading يعطل GIL"],
+    "answer": "threading يشارك نفس الذاكرة، multiprocessing يستخدم عمليات منفصلة",
+    "explanation": "multiprocessing ينشئ عمليات مستقلة تستخدم ذاكرة منفصلة بينما الـ threads تتشارك الذاكرة."
+  },
+  {
+    "id": "q19",
+    "level": "PCEP",
+    "type": "fill_in_blank",
+    "points": 1,
+    "prompt": "أكمل: لطباعة نص نستخدم الدالة ____ في بايثون.",
+    "answer": "print",
+    "explanation": "print() هي الدالة لطباعة مخرجات إلى الشاشة."
+  },
+  {
+    "id": "q20",
+    "level": "PCAP",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "أي من التالي هو نوع غير قابل للتغيير (immutable)؟",
+    "choices": ["list", "dict", "tuple", "set"],
+    "answer": "tuple",
+    "explanation": "tuples غير قابلة للتغيير بينما lists و dicts قابلة للتغيير."
+  },
+  {
+    "id": "q21",
+    "level": "PCAP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "s = ' hello '\nprint(s.strip())",
+    "answer": "hello",
+    "explanation": "strip() يزيل الفراغات من البداية والنهاية."
+  },
+  {
+    "id": "q22",
+    "level": "PCPP-1",
+    "type": "multiple_choice",
+    "points": 3,
+    "prompt": "ما فائدة استخدام decorators في بايثون؟",
+    "choices": ["تعديل سلوك الدوال/الطرق دون تغيير شفرتها الأصلية","تسريع تنفيذ الدوال دائما","تعطيل الدوال","تحويل الدوال لكائنات"],
+    "answer": "تعديل سلوك الدوال/الطرق دون تغيير شفرتها الأصلية",
+    "explanation": "الديكوراتور يسمح بإضافة سلوك قبل/بعد استدعاء الدالة دون تعديلها."
+  },
+  {
+    "id": "q23",
+    "level": "PCPP-2",
+    "type": "code_output",
+    "points": 3,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "def gen():\n    for i in range(3):\n        yield i\n\nprint(list(gen()))",
+    "answer": "[0, 1, 2]",
+    "explanation": "المولد يولد الأرقام 0،1،2 ثم تتحول إلى قائمة."
+  },
+  {
+    "id": "q24",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما نوع المتغير الذي يحمل قيمة صحيحة/خاطئة؟",
+    "choices": ["int", "bool", "str", "float"],
+    "answer": "bool",
+    "explanation": "bool يحمل True أو False."
+  },
+  {
+    "id": "q25",
+    "level": "PCAP",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "ما الدالة التي تستخدم لفرز قائمة ثم إرجاع نسخة جديدة؟",
+    "choices": ["sorted()", "list.sort()", "order()", "sort()"],
+    "answer": "sorted()",
+    "explanation": "sorted() تُرجع نسخة مرتبة دون تعديل القائمة الأصلية."
+  },
+  {
+    "id": "q26",
+    "level": "PCPP-1",
+    "type": "multiple_choice",
+    "points": 3,
+    "prompt": "ما هو مفهوم "duck typing" في بايثون؟",
+    "choices": ["التركيز على سلوك الكائن بدلاً من نوعه","فرض نوع ثابت على المتغيرات","تحويل الأنواع تلقائياً","تعدد الوراثة"],
+    "answer": "التركيز على سلوك الكائن بدلاً من نوعه",
+    "explanation": "duck typing يعني أن تُعامِل الكائن حسب ما يمكنه فعله، لا حسب فئته."
+  },
+  {
+    "id": "q27",
+    "level": "PCPP-2",
+    "type": "multiple_choice",
+    "points": 3,
+    "prompt": "ما الملف الذي يحتوي عادةً على نقاط الدخول للاختبارات في مشروع pytest؟",
+    "choices": ["tests/", "main.py", "setup.py", "requirements.txt"],
+    "answer": "tests/",
+    "explanation": "مجلد tests يحتوي سيناريوهات الاختبار مع pytest."
+  },
+  {
+    "id": "q28",
+    "level": "PCAP",
+    "type": "fill_in_blank",
+    "points": 2,
+    "prompt": "أكمل: لطباعة عنوان العنصر الأخير في القائمة lst نكتب lst[ ____ ] .",
+    "answer": "-1",
+    "explanation": "الفهرس -1 يشير لآخر عنصر في القائمة."
+  },
+  {
+    "id": "q29",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 1,
+    "prompt": "ما مخرج الكود التالي؟",
+    "code": "print(len('abc'))",
+    "answer": "3",
+    "explanation": "طول السلسلة 'abc' هو 3."
+  },
+  {
+    "id": "q30",
+    "level": "PCPP-1",
+    "type": "multiple_choice",
+    "points": 3,
+    "prompt": "ما الأداة المستخدمة لقياس أداء أجزاء من الكود في بايثون؟",
+    "choices": ["timeit", "unittest", "pylint", "mypy"],
+    "answer": "timeit",
+    "explanation": "timeit تُستخدم لقياس زمن تنفيذ تعبيرات صغيرة."
   }
 ]
