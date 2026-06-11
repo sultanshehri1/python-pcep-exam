@@ -1,4 +1,4 @@
-// assets/js/app.js - تحسين الخوارزمية لتأمين العدد المطلوب من الأسئلة مع إعطاء أولوية لمستوى المستخدم
+// assets/js/app.js - improved loadQuestions with fallback to raw.githubusercontent and cache-bust
 const QUESTIONS_URL = 'data/questions.json';
 
 let questions = [];
@@ -16,14 +16,30 @@ let state = {
 function el(id){ return document.getElementById(id); }
 
 async function loadQuestions(){
+  const LOCAL = QUESTIONS_URL;
+  const FALLBACK = 'https://raw.githubusercontent.com/sultanshehri1/python-pcep-exam/feature/interactive-exam/data/questions.json';
+
   try{
-    const res = await fetch(QUESTIONS_URL);
-    if(!res.ok) throw new Error('فشل تحميل الأسئلة');
+    // try local first (no-store to avoid cached stale copy)
+    let res = await fetch(LOCAL, {cache: 'no-store'});
+    if(!res.ok){
+      console.warn('Local fetch failed with', res.status, 'trying fallback...');
+      // try fallback (cache-bust)
+      res = await fetch(FALLBACK + '?t=' + Date.now(), {cache: 'no-store'});
+    }
+
+    if(!res.ok) throw new Error('فشل تحميل الأسئلة (status: ' + res.status + ')');
+
     const data = await res.json();
+    if(!Array.isArray(data)) throw new Error('تنسيق ملف الأسئلة غير صحيح');
     questions = data;
+    console.log('Loaded questions:', questions.length);
+
   }catch(e){
-    console.error(e);
+    console.error('loadQuestions error', e);
     questions = [];
+    // Inform user with actionable steps
+    alert('تعذّر تحميل بنك الأسئلة حالياً. جرّب إعادة تحميل الصفحة بدون كاش (Ctrl+F5) أو تشغيل خادم محلي: "python -m http.server 8000" ثم افتح http://localhost:8000/. راجع Console للمزيد من التفاصيل.');
   }
 }
 
@@ -45,7 +61,7 @@ function start(){
   pool.push(...others);
 
   if(pool.length === 0){
-    alert('لا توجد أسئلة في البنك حالياً. الرجاء إضافة أسئلة إلى data/questions.json');
+    alert('لا توجد أسئلة في البنك حالياً. الرجاء إضافة أسئلة إلى data/questions.json أو تأكد من أن الملف تم تحميله بنجاح.');
     return;
   }
 
