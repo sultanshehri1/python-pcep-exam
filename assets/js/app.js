@@ -1,10 +1,10 @@
-// assets/js/app.js - نسخة MVP بسيطة لإدارة الاختبار
+// assets/js/app.js - نسخة محسّنة: تضمن احترام عدد الأسئلة المطلوب وتطبيع المقارنات
 const QUESTIONS_URL = 'data/questions.json';
 
 let questions = [];
 let state = {
   level: 'PCEP',
-  count: 10,
+  requestedCount: 10,
   index: 0,
   answers: {},
   timed: false,
@@ -29,13 +29,43 @@ async function loadQuestions(){
 
 function start(){
   state.level = el('level').value;
-  state.count = parseInt(el('count').value,10) || 10;
+  state.requestedCount = parseInt(el('count').value,10) || 10;
   state.timed = el('timed').checked;
-  let pool = questions.filter(q => q.level === state.level);
-  if(pool.length === 0){ alert('لا توجد أسئلة لهذا المستوى حالياً'); return; }
-  if(pool.length < state.count) state.count = pool.length;
-  shuffle(pool);
-  state.sessionQuestions = pool.slice(0, state.count);
+  state.answers = {};
+
+  // بناء مجموعة الأسئلة مع محاولة الوفاء بعدد الأسئلة المطلوب
+  const byLevel = questions.filter(q => q.level === state.level);
+  let session = [];
+
+  // نسخ مجموعات لمساعدة الملء
+  const others = questions.filter(q => q.level !== state.level);
+
+  // خshuffle
+  shuffle(byLevel);
+  shuffle(others);
+
+  // إملاء من المستوى أولاً
+  session = session.concat(byLevel.slice(0));
+
+  // إذا لم يكفِ، أضف من المستويات الأخرى (بدون تكرار)
+  for(let i=0, j=0; session.length < state.requestedCount && j < others.length; j++){
+    if(!session.find(s => s.id === others[j].id)) session.push(others[j]);
+  }
+
+  // إذا ما زلنا أقل من المطلوب، نُسمح بالتكرار بطريقة متعمدة (دوران)
+  let k = 0;
+  const combined = session.length ? session.slice(0) : questions.slice(0);
+  while(session.length < state.requestedCount && combined.length > 0){
+    session.push(combined[k % combined.length]);
+    k++;
+  }
+
+  // الآن نقطع ونخلط لضمان عدم ظهور تسلسل ممل
+  shuffle(session);
+  state.sessionQuestions = session.slice(0, state.requestedCount);
+
+  // ضبط العد الفعلي ليتطابق مع عدد الأسئلة المُجهز
+  state.count = state.sessionQuestions.length;
   state.index = 0;
   showExam();
 }
@@ -52,13 +82,14 @@ function renderQuestion(){
   el('q-index').textContent = state.index + 1;
   const area = el('question-area');
   area.innerHTML = '';
-  const p = document.createElement('div');
-  p.className = 'prompt';
-  p.textContent = q.prompt;
-  area.appendChild(p);
+
+  const top = document.createElement('div');
+  top.className = 'prompt';
+  top.textContent = q.prompt;
+  area.appendChild(top);
 
   if(q.type === 'multiple_choice'){
-    q.choices.forEach((c, i) => {
+    q.choices.forEach((c) => {
       const label = document.createElement('label');
       label.innerHTML = `<input type="radio" name="choice" value="${escapeHtml(c)}"> ${escapeHtml(c)}`;
       area.appendChild(label);
@@ -87,7 +118,6 @@ function renderQuestion(){
     input.id = 'answer-input';
     area.appendChild(input);
   } else {
-    // نوع غير مدعوم بعد
     const note = document.createElement('div');
     note.textContent = 'نوع السؤال هذا مدعوم لاحقاً.';
     area.appendChild(note);
@@ -101,6 +131,13 @@ function renderQuestion(){
     const txt = area.querySelector('#answer-input');
     if(txt) txt.value = saved;
   }
+
+  // تحديث شريط التقدم البسيط (يمكن توسيعه لاحقاً)
+  updateProgressBar();
+}
+
+function updateProgressBar(){
+  // إذا أردت شريط مرئي أضفه هنا؛ حالياً نحدّث النص فقط
 }
 
 function nextQuestion(){
@@ -138,20 +175,39 @@ function finish(){
   showResults();
 }
 
+function normalizeAnswer(s){
+  if(s == null) return '';
+  // تجاهل حالة الأحرف، فراغات متكررة، والإزاحة
+  return String(s).trim().replace(/\s+/g,' ').toLowerCase();
+}
+
 function showResults(){
   let total = 0, earned = 0;
   const review = [];
   state.sessionQuestions.forEach(q => {
     total += (q.points || 1);
-    const ans = state.answers[q.id];
+    const rawAns = state.answers[q.id];
+    const ans = normalizeAnswer(rawAns);
     let ok = false;
+
     if(q.type === 'multiple_choice' || q.type === 'true_false'){
-      ok = String(ans).trim() === String(q.answer).trim();
+      ok = normalizeAnswer(q.answer) === ans;
     } else if(q.type === 'code_output' || q.type === 'fill_in_blank'){
-      ok = String(ans).trim() === String(q.answer).trim();
+      // قبول التطابق النصي بعد التطبيع، أو قبول regex إذا مُعرّف
+      if(q.answer_regex){
+        try{
+          const re = new RegExp(q.answer_regex,'i');
+          ok = re.test(rawAns || '');
+        }catch(e){
+          ok = normalizeAnswer(q.answer) === ans;
+        }
+      } else {
+        ok = normalizeAnswer(q.answer) === ans;
+      }
     }
+
     if(ok) earned += (q.points || 1);
-    review.push({q, ans, ok});
+    review.push({q, ans: rawAns, ok});
   });
   el('score').textContent = `النقاط: ${earned} / ${total} — النسبة: ${total? Math.round(earned/total*100):0}%`;
   const rdiv = el('review');
@@ -160,10 +216,10 @@ function showResults(){
     const d = document.createElement('div');
     d.className = 'review-item';
     d.innerHTML = `<h4>${escapeHtml(item.q.prompt)}</h4>
-                   <p>إجابتك: ${escapeHtml(item.ans || '')}</p>
-                   <p>الصحيحة: ${escapeHtml(item.q.answer)}</p>
-                   <p>النتيجة: ${item.ok ? 'صحيح' : 'خاطئ'}</p>
-                   <p>شرح: ${escapeHtml(item.q.explanation || '')}</p>`;
+                   <p class=\"small\">إجابتك: ${escapeHtml(item.ans || '')}</p>
+                   <p class=\"small\">الصحيحة: ${escapeHtml(item.q.answer || (item.q.answer_regex || ''))}</p>
+                   <p class=\"small\">النتيجة: ${item.ok ? '<span style=\"color:var(--success)\">صحيح</span>' : '<span style=\"color:var(--danger)\">خاطئ</span>'}</p>
+                   <p class=\"small\">شرح: ${escapeHtml(item.q.explanation || '')}</p>`;
     rdiv.appendChild(d);
   });
 }
