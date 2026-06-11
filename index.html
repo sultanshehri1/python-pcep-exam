@@ -1,56 +1,58 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>PCEP – Python Entry-Level Practice Exam</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>نموذج اختبارات بايثون - معهد بايثون</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-
 <body>
+  <main id="app">
+    <header>
+      <h1>نموذج اختبارات بايثون</h1>
+      <p id="subtitle">اختر مستوى الشهادة وابدأ الاختبار التفاعلي</p>
+    </header>
 
-<header>
-  <h1>PCEP – Python Entry-Level Exam</h1>
-  <p>Practice Test (Unofficial)</p>
-</header>
+    <section id="start-screen" class="card">
+      <label for="level">المستوى</label>
+      <select id="level">
+        <option value="PCEP">PCEP (مبتدئ)</option>
+        <option value="PCAP">PCAP (مساعد)</option>
+        <option value="PCPP-1">PCPP-1 (متقدم)</option>
+        <option value="PCPP-2">PCPP-2 (متقدم جداً)</option>
+      </select>
 
-<main id="app">
+      <label for="count">عدد الأسئلة</label>
+      <input id="count" type="number" min="1" max="100" value="10"/>
 
-  <section id="intro">
-    <h2>Instructions</h2>
-    <ul>
-      <li>Total questions: <strong>30</strong></li>
-      <li>Single choice per question</li>
-      <li>No time limit (can be enabled)</li>
-      <li>Results shown after submission</li>
-    </ul>
+      <label class="checkbox-inline">
+        <input type="checkbox" id="timed" /> اختبار بزمن محدود
+      </label>
 
-    <button id="startBtn">Start Exam</button>
-  </section>
+      <button id="start-btn" class="btn">ابدأ الاختبار</button>
+    </section>
 
-  <section id="exam" class="hidden">
-    <div id="question-box"></div>
+    <section id="exam-screen" class="hidden card">
+      <div class="top-row">
+        <div id="progress">السؤال <span id="q-index">1</span> / <span id="q-total">10</span></div>
+        <div id="timer" class="timer">00:00</div>
+      </div>
+      <article id="question-area"></article>
+      <div id="controls" class="controls">
+        <button id="prev-btn" class="btn">السابق</button>
+        <button id="next-btn" class="btn">التالي</button>
+        <button id="finish-btn" class="btn primary">إنهاء</button>
+      </div>
+    </section>
 
-    <div class="navigation">
-      <button id="prevBtn">Previous</button>
-      <button id="nextBtn">Next</button>
-      <button id="submitBtn">Submit Exam</button>
-    </div>
-  </section>
+    <section id="result-screen" class="hidden card">
+      <h2>النتيجة</h2>
+      <div id="score"></div>
+      <div id="review"></div>
+      <button id="home-btn" class="btn">العودة للصفحة الرئيسية</button>
+    </section>
+  </main>
 
-  <section id="result" class="hidden">
-    <h2>Exam Result</h2>
-    <p id="score"></p>
-    <div id="review"></div>
-
-    <button onclick="location.reload()">Restart Exam</button>
-  </section>
-
-</main>
-
-<script src="config.js"></script>
-<script src="questions.js"></script>
-<script src="engine.js"></script>
-
+  <script src="assets/js/app.js"></script>
 </body>
 </html>

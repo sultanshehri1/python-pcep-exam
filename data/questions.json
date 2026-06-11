@@ -1,0 +1,101 @@
+[
+  {
+    "id": "q1",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما نوع البيانات الناتج عن التعبير التالي في بايثون: 3 / 2 ؟",
+    "choices": ["int", "float", "str", "bool"],
+    "answer": "float",
+    "explanation": "القسمة / في بايثون 3 تنتج float (1.5)."
+  },
+  {
+    "id": "q2",
+    "level": "PCEP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما هو مخرج الكود التالي؟",
+    "code": "print('a' * 3)",
+    "answer": "aaa",
+    "explanation": "تكرار السلسلة ينتج 'aaa'."
+  },
+  {
+    "id": "q3",
+    "level": "PCEP",
+    "type": "fill_in_blank",
+    "points": 1,
+    "prompt": "أكمل الفراغ: الكلمة المحجوزة لإنشاء دالة هي ____ .",
+    "answer": "def",
+    "explanation": "يتم تعريف الدوال بكلمة def."
+  },
+  {
+    "id": "q4",
+    "level": "PCAP",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "أي نوع من الهياكل في بايثون يقبل عناصر قابلة للتغيير (mutable)؟",
+    "choices": ["tuple", "list", "str", "frozenset"],
+    "answer": "list",
+    "explanation": "القوائم (list) قابلة للتغيير بينما tuples و strings غير قابلة للتغيير."
+  },
+  {
+    "id": "q5",
+    "level": "PCAP",
+    "type": "code_output",
+    "points": 2,
+    "prompt": "ما هو مخرج الكود التالي؟",
+    "code": "x = [1,2,3]\nprint(x[::-1])",
+    "answer": "[3, 2, 1]",
+    "explanation": "slicing مع -1 يعكس القائمة."
+  },
+  {
+    "id": "q6",
+    "level": "PCAP",
+    "type": "multiple_choice",
+    "points": 2,
+    "prompt": "ما النتيجة عند تنفيذ: set([1,1,2,3])؟",
+    "choices": ["[1,1,2,3]", "{1,2,3}", "(1,2,3)", "{'1','2','3'}"],
+    "answer": "{1,2,3}",
+    "explanation": "المجموعة تحذف التكرارات وتعرض عناصر غير مرتبة."
+  },
+  {
+    "id": "q7",
+    "level": "PCPP-1",
+    "type": "multiple_choice",
+    "points": 3,
+    "prompt": "أي من التالي يعرّف طريقة ثابتة (static method) داخل صف (class) في بايثون؟",
+    "choices": ["@staticmethod", "@classmethod", "def __init__", "@property"],
+    "answer": "@staticmethod",
+    "explanation": "@staticmethod يجعل الدالة لا تتلقى مرجع self أو cls."
+  },
+  {
+    "id": "q8",
+    "level": "PCPP-1",
+    "type": "code_output",
+    "points": 3,
+    "prompt": "ما هو مخرج الكود التالي؟",
+    "code": "def f(a, b=2):\n    return a*b\n\nprint(f(3))",
+    "answer": "6",
+    "explanation": "الوسيط b يأخذ القيمة الافتراضية 2، 3*2=6."
+  },
+  {
+    "id": "q9",
+    "level": "PCPP-2",
+    "type": "multiple_choice",
+    "points": 3,
+    "prompt": "ما الفائدة من استخدام مولدات (generators) في بايثون؟",
+    "choices": ["استهلاك ذاكرة أقل","زيادة السرعة في كل الحالات","تعطيل الـ GC","تخزين جميع النتائج في الذاكرة"],
+    "answer": "استهلاك ذاكرة أقل",
+    "explanation": "المولدات تولد القيم عند الطلب وتستهلك ذاكرة أقل."
+  },
+  {
+    "id": "q10",
+    "level": "PCEP",
+    "type": "multiple_choice",
+    "points": 1,
+    "prompt": "ما الكلمة المحجوزة المستخدمة للخروج من حلقة في بايثون؟",
+    "choices": ["break", "stop", "exit", "return"],
+    "answer": "break",
+    "explanation": "break يخرج من الحلقة الحالية."
+  }
+]
